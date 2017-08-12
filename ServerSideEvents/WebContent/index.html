@@ -1,0 +1,25 @@
+<div id='foo'>pants</div>
+
+<button onclick="start()">Start</button>
+
+
+<script type="text/javascript">
+	var eventSource=null;
+    function start() {
+    		if (eventSource!=null){
+    			eventSource.close();
+    			console.log('sdfsdf');
+    		}
+        eventSource = new EventSource("TestServlet");
+        eventSource.onmessage = function(event) {
+            console.log("data: "+event.data)
+            document.getElementById('foo').innerHTML = event.data;
+        };
+    }
+    
+    window.onbeforeunload = function(e) {
+		if (eventSource!=null){
+    	 		eventSource.close();
+		}
+	};
+</script>
