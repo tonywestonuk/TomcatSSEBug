@@ -1,15 +1,23 @@
 <div id='foo'>pants</div>
 
 <button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+
 
 
 <script type="text/javascript">
 	var eventSource=null;
+	
+	
+	function stop(){
+		if (eventSource!=null){
+			eventSource.close();
+			console.log('stopped');
+		}
+	}
+	
     function start() {
-    		if (eventSource!=null){
-    			eventSource.close();
-    			console.log('sdfsdf');
-    		}
+    		
         eventSource = new EventSource("TestServlet");
         eventSource.onmessage = function(event) {
             console.log("data: "+event.data)
